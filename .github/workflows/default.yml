@@ -12,14 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-#     - uses: ammaraskar/sphinx-action@master
-#       with:
-#         pre-build-command: "apt-get update -y && apt-get install -y pandoc texlive-fonts-recommended fonts-lmodern"
-#         docs-folder: "source"
-#         build-command: "sphinx-build -b html . ../build"
     - uses: ammaraskar/sphinx-action@master
       with:
-        pre-build-command: "apt-get update -y && apt-get install -y pandoc latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended fonts-lmodern"
+        pre-build-command: "apt-get update -y && apt-get install -y pandoc inkscape latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended fonts-lmodern"
         docs-folder: "source"
         build-command: "make -C ../ html latexpdf"
     # Great extra actions to compose with:
