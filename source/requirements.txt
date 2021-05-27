@@ -8,6 +8,7 @@ ipython
 
 # source/pbw-numpyro.py: 231,232
 jax
+jaxlib>=0.1.65
 
 # source/pbw-numpyro.py: 222
 # source/plotting.py: 39,48
