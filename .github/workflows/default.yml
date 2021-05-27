@@ -12,19 +12,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    # Example of using a custom build-command.
     - uses: ammaraskar/sphinx-action@master
       with:
         pre-build-command: "apt-get update -y && apt-get install -y pandoc texlive-fonts-recommended fonts-lmodern"
         docs-folder: "source"
         build-command: "sphinx-build -b html . ../build"
-
-    # Grabbing custom dependencies and building as a pdf.
     - uses: ammaraskar/sphinx-action@master
       with:
         pre-build-command: "apt-get update -y && apt-get install -y pandoc latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended fonts-lmodern"
-        docs-folder: "./"
-        build-command: "make latexpdf"
+        docs-folder: "source"
+        build-command: "(cd ../ && make latexpdf)"
     # Great extra actions to compose with:
     # Create an artifact of the html output.
     - uses: actions/upload-artifact@v1
