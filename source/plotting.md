@@ -59,7 +59,7 @@ code = "\n".join([make_html(font) for font in sorted(set([f.name for f in matplo
 HTML("<div style='column-count: 2;'>{}</div>".format(code))
 ```
 
-```python jupyter={"outputs_hidden": true}
+```python
 # ?matplotlib.font_manager.fontManager.addfont
 ```
 
@@ -69,9 +69,9 @@ HTML("<div style='column-count: 2;'>{}</div>".format(code))
 # https://www.archlinux.org/packages/community/any/otf-latin-modern/
 # !sudo pacman -Syu --needed --noconfirm otf-latin-modern inkscape
 # !brew cask install font-latin-modern
-fonts_path = "/usr/share/texmf/fonts/opentype/public/lm/" #ubuntu
+# fonts_path = "/usr/share/texmf/fonts/opentype/public/lm/" #ubuntu
 # fonts_path = "~/Library/Fonts/" # macos
-# fonts_path = "/usr/share/fonts/OTF/" # arch
+fonts_path = "/usr/share/fonts/OTF/" # arch
 matplotlib.font_manager.fontManager.addfont(fonts_path + "lmsans10-regular.otf")
 matplotlib.font_manager.fontManager.addfont(fonts_path + "lmroman10-regular.otf")
 ```
@@ -102,7 +102,7 @@ plt.rcParams.update({'font.size': 16,
 
 ## Create a test plot
 
-```python
+```python tags=[]
 # import numpy as np
 
 # t = np.arange(-1.0, 2.0, 0.01)

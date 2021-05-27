@@ -80,9 +80,9 @@ import matplotlib.font_manager
 ```
 
 ```python
-fonts_path = "/usr/share/texmf/fonts/opentype/public/lm/" #ubuntu
+# fonts_path = "/usr/share/texmf/fonts/opentype/public/lm/" #ubuntu
 # fonts_path = "~/Library/Fonts/" # macos
-# fonts_path = "/usr/share/fonts/OTF/" # arch
+fonts_path = "/usr/share/fonts/OTF/" # arch
 matplotlib.font_manager.fontManager.addfont(fonts_path + "lmsans10-regular.otf")
 matplotlib.font_manager.fontManager.addfont(fonts_path + "lmroman10-regular.otf")
 ```
