@@ -16,14 +16,14 @@ jobs:
       with:
         name: Build HTML
         pre-build-command: "apt-get update -y && apt-get install -y texlive-fonts-recommended fonts-lmodern"
-        build-command: "make html"
+        build-command: "sphinx-build source build -b html"
         docs-folder: "./"
     # Grabbing custom dependencies and building as a pdf.
     - uses: ammaraskar/sphinx-action@master
       with:
         name: Build PDF
         pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended fonts-lmodern"
-        build-command: "make latexpdf"
+        build-command: "sphinx-build source build -b latexpdf"
         docs-folder: "./"
     # Great extra actions to compose with:
     # Create an artifact of the html output.
