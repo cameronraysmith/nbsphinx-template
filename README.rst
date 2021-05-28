@@ -1,4 +1,4 @@
-Notes on model construction
-===========================
+Template repository for nbsphinx
+================================
 
-This repository contains various notes on applied mathematical model construction.
+This repository serves as a template for using [nbsphinx](https://github.com/spatialaudio/nbsphinx) to compile a collection of jupyter notebooks into html and, via [LaTeX](https://www.latex-project.org), to pdf.
