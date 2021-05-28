@@ -399,17 +399,16 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>The implementation of the modelling and inference translated from <a class="reference external" href="https://github.com/lstmemery/principled-bayesian-workflow-pymc3">lstmemery’s pymc3 implementation of Betancourt’s principled Bayesian workflow</a> to <a class="reference external" href="http://num.pyro.ai/en/stable/">numpyro</a> is by <a class="reference external" href="https://fehiepsi.github.io/">Du Phan</a>.</p>
 <p>Test <span id="id1">[<a class="reference internal" href="../references.html#id3">WHP17</a>]</span>.</p>
-</div>
 <div class="section" id="Setup">
-<h1>Setup<a class="headerlink" href="#Setup" title="Permalink to this headline">¶</a></h1>
+<h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Install-libraries">
-<h2>Install libraries<a class="headerlink" href="#Install-libraries" title="Permalink to this headline">¶</a></h2>
+<h3>Install libraries<a class="headerlink" href="#Install-libraries" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># %run -i &#39;plotting.py&#39;</span>
+<span></span><span class="c1">## %run -i &#39;plotting.py&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -418,14 +417,14 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># !apt-get install -y fonts-lmodern</span>
-<span class="c1"># !pip install -q arviz numpyro</span>
+<span></span><span class="c1">## !apt-get install -y fonts-lmodern</span>
+<span class="c1">## !pip install -q arviz numpyro</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Add-latin-modern-fonts">
-<h2>Add latin modern fonts<a class="headerlink" href="#Add-latin-modern-fonts" title="Permalink to this headline">¶</a></h2>
+<h3>Add latin modern fonts<a class="headerlink" href="#Add-latin-modern-fonts" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -441,8 +440,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># fonts_path = &quot;/usr/share/texmf/fonts/opentype/public/lm/&quot; #ubuntu</span>
-<span class="c1"># fonts_path = &quot;~/Library/Fonts/&quot; # macos</span>
+<span></span><span class="c1">## fonts_path = &quot;/usr/share/texmf/fonts/opentype/public/lm/&quot; #ubuntu</span>
+<span class="c1">## fonts_path = &quot;~/Library/Fonts/&quot; # macos</span>
 <span class="n">fonts_path</span> <span class="o">=</span> <span class="s2">&quot;/usr/share/fonts/OTF/&quot;</span> <span class="c1"># arch</span>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">fonts_path</span> <span class="o">+</span> <span class="s2">&quot;lmsans10-regular.otf&quot;</span><span class="p">)</span>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">fonts_path</span> <span class="o">+</span> <span class="s2">&quot;lmroman10-regular.otf&quot;</span><span class="p">)</span>
@@ -451,17 +450,17 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="section" id="Set-matplotlib-to-use-latin-modern-fonts">
-<h2>Set matplotlib to use latin modern fonts<a class="headerlink" href="#Set-matplotlib-to-use-latin-modern-fonts" title="Permalink to this headline">¶</a></h2>
+<h3>Set matplotlib to use latin modern fonts<a class="headerlink" href="#Set-matplotlib-to-use-latin-modern-fonts" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
-<span class="c1">#%matplotlib inline</span>
+<span class="c1">##%matplotlib inline</span>
 <span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span> <span class="c1"># use SVG backend to maintain vectorization</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span> <span class="c1">#reset default parameters</span>
-<span class="c1"># https://stackoverflow.com/a/3900167/446907</span>
+<span class="c1">## https://stackoverflow.com/a/3900167/446907</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
                      <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;sans-serif&#39;</span><span class="p">],</span>
                      <span class="s1">&#39;font.serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Latin Modern Roman&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.serif&#39;</span><span class="p">],</span>
@@ -481,17 +480,17 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="section" id="Modeling-process">
-<h1>Modeling process<a class="headerlink" href="#Modeling-process" title="Permalink to this headline">¶</a></h1>
+<h2>Modeling process<a class="headerlink" href="#Modeling-process" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="Observing-the-world-through-the-lens-of-probability">
-<h2>Observing the world through the lens of probability<a class="headerlink" href="#Observing-the-world-through-the-lens-of-probability" title="Permalink to this headline">¶</a></h2>
+<h3>Observing the world through the lens of probability<a class="headerlink" href="#Observing-the-world-through-the-lens-of-probability" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="Systems,-environments,-and-observations">
-<h3>Systems, environments, and observations<a class="headerlink" href="#Systems,-environments,-and-observations" title="Permalink to this headline">¶</a></h3>
+<h4>Systems, environments, and observations<a class="headerlink" href="#Systems,-environments,-and-observations" title="Permalink to this headline">¶</a></h4>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_probes/multiple_probes.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_probes/multiple_probes.png" style="width: 90%;" /></a> <a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_observational_processes/multiple_observational_processes.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_observational_processes/multiple_observational_processes.png" style="width: 90%;" /></a></p>
 </center></div></div>
 <div class="section" id="The-space-of-observational-models-and-the-true-data-generating-process">
-<h3>The space of observational models and the true data generating process<a class="headerlink" href="#The-space-of-observational-models-and-the-true-data-generating-process" title="Permalink to this headline">¶</a></h3>
+<h4>The space of observational models and the true data generating process<a class="headerlink" href="#The-space-of-observational-models-and-the-true-data-generating-process" title="Permalink to this headline">¶</a></h4>
 <div class="section" id="The-observational-model">
-<h4>The observational model<a class="headerlink" href="#The-observational-model" title="Permalink to this headline">¶</a></h4>
+<h5>The observational model<a class="headerlink" href="#The-observational-model" title="Permalink to this headline">¶</a></h5>
 <ul class="simple">
 <li><p>observation space: <span class="math notranslate nohighlight">\(Y\)</span></p></li>
 <li><p>arbitrary points in the observation space: <span class="math notranslate nohighlight">\(y\)</span></p></li>
@@ -505,7 +504,7 @@ div.rendered_html tbody tr:hover {
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world/small_world.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world/small_world.png" style="width: 45%;" /></a> <a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_one/small_world_one.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_one/small_world_one.png" style="width: 45%;" /></a></p>
 </center></div></div>
 <div class="section" id="The-true-data-generating-process">
-<h4>The true data generating process<a class="headerlink" href="#The-true-data-generating-process" title="Permalink to this headline">¶</a></h4>
+<h5>The true data generating process<a class="headerlink" href="#The-true-data-generating-process" title="Permalink to this headline">¶</a></h5>
 <ul class="simple">
 <li><p>true data generating process: <span class="math notranslate nohighlight">\(\pi^{\dagger}\)</span> is the probability distribution that exactly captures the observational process in a given application</p></li>
 </ul>
@@ -513,22 +512,22 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="section" id="The-practical-reality-of-model-construction">
-<h2>The practical reality of model construction<a class="headerlink" href="#The-practical-reality-of-model-construction" title="Permalink to this headline">¶</a></h2>
+<h3>The practical reality of model construction<a class="headerlink" href="#The-practical-reality-of-model-construction" title="Permalink to this headline">¶</a></h3>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_two/small_world_two.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_two/small_world_two.png" style="width: 75%;" /></a></p>
 </center></div></div>
 <div class="section" id="The-process-of-inference">
-<h2>The process of inference<a class="headerlink" href="#The-process-of-inference" title="Permalink to this headline">¶</a></h2>
+<h3>The process of inference<a class="headerlink" href="#The-process-of-inference" title="Permalink to this headline">¶</a></h3>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/model_config/model_config5/model_config5.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/model_config/model_config5/model_config5.png" style="width: 90%;" /></a></p>
 </center></div><p>How can we do our best to validate this process works as close as possible to providing a high quality mirror for natural systems?</p>
 </div>
 <div class="section" id="Workflow-overview">
-<h2>Workflow overview<a class="headerlink" href="#Workflow-overview" title="Permalink to this headline">¶</a></h2>
+<h3>Workflow overview<a class="headerlink" href="#Workflow-overview" title="Permalink to this headline">¶</a></h3>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/principled_bayesian_workflow/figures/workflow/all/all.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/principled_bayesian_workflow/figures/workflow/all/all.png" style="width: 70%;" /></a></p>
 </center></div></div>
 <div class="section" id="Example-generative-models">
-<h2>Example generative models<a class="headerlink" href="#Example-generative-models" title="Permalink to this headline">¶</a></h2>
+<h3>Example generative models<a class="headerlink" href="#Example-generative-models" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="Univariate-normal-model">
-<h3>Univariate normal model<a class="headerlink" href="#Univariate-normal-model" title="Permalink to this headline">¶</a></h3>
+<h4>Univariate normal model<a class="headerlink" href="#Univariate-normal-model" title="Permalink to this headline">¶</a></h4>
 <p>From a very simple perspective, generative modeling refers to the situation in which we develop a candidate probabilistic specification of the process from which our data are generated. Usually this will include the specification of prior distributions over all first-order parameters.</p>
 <div><center><p><a class="no-scaled-link reference internal" href="https://www.bayespy.org/_images/tikz-57bc0c88a2974f4c1e2335fe9edb88ff2efdf970.png"><img alt="Drawing" class="no-scaled-link" src="https://www.bayespy.org/_images/tikz-57bc0c88a2974f4c1e2335fe9edb88ff2efdf970.png" style="width: 10%;" /></a></p>
 </center></div><p><span class="math">\begin{equation*}
@@ -541,7 +540,7 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 <p>This comes from the library <a class="reference external" href="https://github.com/bayespy/bayespy/blob/develop/doc/source/user_guide/quickstart.rst">bayespy</a>. The best description we are aware of regarding the syntax and semantics of graphical models via factor graph notation is in the <a class="reference external" href="https://github.com/jluttine/tikz-bayesnet">tikz-bayesnet</a> library <a class="reference external" href="https://github.com/jluttine/tikz-bayesnet/blob/master/dietz-techreport.pdf">technical report</a>.</p>
 </div>
 <div class="section" id="Multivariate-normal-models">
-<h3>Multivariate normal models<a class="headerlink" href="#Multivariate-normal-models" title="Permalink to this headline">¶</a></h3>
+<h4>Multivariate normal models<a class="headerlink" href="#Multivariate-normal-models" title="Permalink to this headline">¶</a></h4>
 <div><center><p><a class="no-scaled-link reference internal" href="https://www.bayespy.org/_images/tikz-80a1db369be1f25b61ceacfff551dae2bdd331c3.png"><img alt="Drawing" class="no-scaled-link" src="https://www.bayespy.org/_images/tikz-80a1db369be1f25b61ceacfff551dae2bdd331c3.png" style="width: 10%;" /></a></p>
 </center></div><div class="math notranslate nohighlight">
 \[\mathbf{y}_{mn} \sim \mathcal{N}(\boldsymbol{\mu}, \mathbf{\Lambda}),\qquad m=0,\ldots,9, \quad n=0,\ldots,29.\]</div>
@@ -554,24 +553,24 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 </div>
 </div>
 <div class="section" id="“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow">
-<h1>“Build, compute, critique, repeat”: Box’s loop in iteration through Betancourt’s principled Bayesian workflow<a class="headerlink" href="#“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow" title="Permalink to this headline">¶</a></h1>
+<h2>“Build, compute, critique, repeat”: Box’s loop in iteration through Betancourt’s principled Bayesian workflow<a class="headerlink" href="#“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id2">
-<h2>Setup<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h3>Setup<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="Load-libraries">
-<h3>Load libraries<a class="headerlink" href="#Load-libraries" title="Permalink to this headline">¶</a></h3>
+<h4>Load libraries<a class="headerlink" href="#Load-libraries" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># %pylab inline</span>
+<span></span><span class="c1">## %pylab inline</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="c1"># plt.style.use([&#39;seaborn-talk&#39;])</span>
-<span class="c1"># plt.rcParams[&quot;figure.figsize&quot;] = (10,8)</span>
+<span class="c1">## plt.style.use([&#39;seaborn-talk&#39;])</span>
+<span class="c1">## plt.rcParams[&quot;figure.figsize&quot;] = (10,8)</span>
 
 <span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
 <span class="kn">import</span> <span class="nn">jax</span>
@@ -600,7 +599,7 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 </div>
 </div>
 <div class="section" id="define-colors">
-<h3>define colors<a class="headerlink" href="#define-colors" title="Permalink to this headline">¶</a></h3>
+<h4>define colors<a class="headerlink" href="#define-colors" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -618,11 +617,11 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 </div>
 </div>
 <div class="section" id="Poisson-process-for-arbitrary-detector-count-data">
-<h2>Poisson process for arbitrary detector count data<a class="headerlink" href="#Poisson-process-for-arbitrary-detector-count-data" title="Permalink to this headline">¶</a></h2>
+<h3>Poisson process for arbitrary detector count data<a class="headerlink" href="#Poisson-process-for-arbitrary-detector-count-data" title="Permalink to this headline">¶</a></h3>
 <!-- 4.1 --><p>Below is an analysis of a data set of integer counts from a hypothetical series of experiments in which an ensemble of detectors is employed to count particles emitted from a radioactive specimen. We build a first candidate model that is consistent with the domain knowledge that such counts are integers and emissions are independent justifying experimentation with a Poisson process we hypothesize may account for the distribution of particle counts we observe in our sample data. We proceed in
 subsequent sections to critique and refine this model.</p>
 <div class="section" id="Sample-data">
-<h3>Sample data<a class="headerlink" href="#Sample-data" title="Permalink to this headline">¶</a></h3>
+<h4>Sample data<a class="headerlink" href="#Sample-data" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -661,9 +660,9 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Generative-model-specification">
-<h3>Generative model specification<a class="headerlink" href="#Generative-model-specification" title="Permalink to this headline">¶</a></h3>
+<h4>Generative model specification<a class="headerlink" href="#Generative-model-specification" title="Permalink to this headline">¶</a></h4>
 <div class="section" id="Prior">
-<h4>Prior<a class="headerlink" href="#Prior" title="Permalink to this headline">¶</a></h4>
+<h5>Prior<a class="headerlink" href="#Prior" title="Permalink to this headline">¶</a></h5>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -699,7 +698,7 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Model">
-<h4>Model<a class="headerlink" href="#Model" title="Permalink to this headline">¶</a></h4>
+<h5>Model<a class="headerlink" href="#Model" title="Permalink to this headline">¶</a></h5>
 <p>In this case, the candidate <em>complete Bayesian model</em> under consideration is given by</p>
 <div class="math notranslate nohighlight">
 \[\pi( y_{1}, \ldots, y_{N}, \lambda )
@@ -723,7 +722,7 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Simulation">
-<h4>Simulation<a class="headerlink" href="#Simulation" title="Permalink to this headline">¶</a></h4>
+<h5>Simulation<a class="headerlink" href="#Simulation" title="Permalink to this headline">¶</a></h5>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -791,7 +790,7 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Plot-prior-predictive-distribution">
-<h3>Plot prior predictive distribution<a class="headerlink" href="#Plot-prior-predictive-distribution" title="Permalink to this headline">¶</a></h3>
+<h4>Plot prior predictive distribution<a class="headerlink" href="#Plot-prior-predictive-distribution" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
@@ -831,7 +830,7 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Fit-to-simulated-data">
-<h3>Fit to simulated data<a class="headerlink" href="#Fit-to-simulated-data" title="Permalink to this headline">¶</a></h3>
+<h4>Fit to simulated data<a class="headerlink" href="#Fit-to-simulated-data" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html#Step_Nine:_Fit_Simulated_Ensemble60">Betancourt, 2020</a> performs this for each <code class="docutils literal notranslate"><span class="pre">y</span></code> in trace.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -873,13 +872,13 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Fit-observations-and-evaluate">
-<h3>Fit observations and evaluate<a class="headerlink" href="#Fit-observations-and-evaluate" title="Permalink to this headline">¶</a></h3>
+<h4>Fit observations and evaluate<a class="headerlink" href="#Fit-observations-and-evaluate" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># df = pd.read_csv(&#39;data.csv&#39;)</span>
+<span></span><span class="c1">## df = pd.read_csv(&#39;data.csv&#39;)</span>
 <span class="n">data_ys</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
@@ -987,9 +986,9 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Account-for-measurement-device-failure">
-<h2>Account for measurement device failure<a class="headerlink" href="#Account-for-measurement-device-failure" title="Permalink to this headline">¶</a></h2>
+<h3>Account for measurement device failure<a class="headerlink" href="#Account-for-measurement-device-failure" title="Permalink to this headline">¶</a></h3>
 <!-- 4.2 --><div class="section" id="Update-the-generative-model-specification">
-<h3>Update the generative model specification<a class="headerlink" href="#Update-the-generative-model-specification" title="Permalink to this headline">¶</a></h3>
+<h4>Update the generative model specification<a class="headerlink" href="#Update-the-generative-model-specification" title="Permalink to this headline">¶</a></h4>
 <p>Recall the specification of our first attempt to model the detector count data with a <a class="reference external" href="poisson-process-for-arbitrary-detector-count-data">simple Poisson process model</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">500</span>
@@ -1018,7 +1017,7 @@ subsequent sections to critique and refine this model.</p>
 </div>
 </div>
 <div class="section" id="Simulate-the-updated-model">
-<h3>Simulate the updated model<a class="headerlink" href="#Simulate-the-updated-model" title="Permalink to this headline">¶</a></h3>
+<h4>Simulate the updated model<a class="headerlink" href="#Simulate-the-updated-model" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
@@ -1192,7 +1191,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 </div>
 </div>
 <div class="section" id="Fit-Simulated-Observations-and-Evaluate">
-<h3>Fit Simulated Observations and Evaluate<a class="headerlink" href="#Fit-Simulated-Observations-and-Evaluate" title="Permalink to this headline">¶</a></h3>
+<h4>Fit Simulated Observations and Evaluate<a class="headerlink" href="#Fit-Simulated-Observations-and-Evaluate" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
@@ -1268,7 +1267,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 </div>
 </div>
 <div class="section" id="id3">
-<h3>Fit observations and evaluate<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h4>Fit observations and evaluate<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
@@ -1372,9 +1371,9 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 </div>
 </div>
 <div class="section" id="Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices">
-<h2>Account for the distinction between functioning and malfunctioning measurement devices<a class="headerlink" href="#Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices" title="Permalink to this headline">¶</a></h2>
+<h3>Account for the distinction between functioning and malfunctioning measurement devices<a class="headerlink" href="#Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices" title="Permalink to this headline">¶</a></h3>
 <!-- 4.3 --><div class="section" id="Update-the-generative-model">
-<h3>Update the generative model<a class="headerlink" href="#Update-the-generative-model" title="Permalink to this headline">¶</a></h3>
+<h4>Update the generative model<a class="headerlink" href="#Update-the-generative-model" title="Permalink to this headline">¶</a></h4>
 <p>Build a model that generates zero-inflated Poisson counts and update the <code class="docutils literal notranslate"><span class="pre">HalfNormal</span></code> prior, which, in combination with the zero-inflated Poisson distribution, leaves too much probability mass near zero. Here we use an <code class="docutils literal notranslate"><span class="pre">InverseGamma</span></code> prior with hyperparameter settings that leave <span class="math notranslate nohighlight">\(\approx 1\%\)</span> of the probability mass below a detector count of <span class="math notranslate nohighlight">\(1\)</span> and similarly allows for <span class="math notranslate nohighlight">\(\approx 1\%\)</span> of the mass above <span class="math notranslate nohighlight">\(15\)</span>. <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(15\)</span> are on the arbitrary integral
 detector count scale implied here by knowledge of the manufacturing specifications of the hypothetical detector devices.</p>
 <div class="nbinput docutils container">
@@ -1470,7 +1469,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 </div>
 </div>
 <div class="section" id="id4">
-<h3>Plot prior predictive distribution<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h4>Plot prior predictive distribution<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
@@ -1510,7 +1509,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 </div>
 </div>
 <div class="section" id="id5">
-<h3>Fit to simulated data<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h4>Fit to simulated data<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <p>In the example, Betancourt performs this for each <code class="docutils literal notranslate"><span class="pre">y</span></code> in trace. Here we only compute this for one element of the trace.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
@@ -1555,13 +1554,13 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 </div>
 </div>
 <div class="section" id="id6">
-<h3>Fit observations and evaluate<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h4>Fit observations and evaluate<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># df = pd.read_csv(&#39;data.csv&#39;)</span>
+<span></span><span class="c1">## df = pd.read_csv(&#39;data.csv&#39;)</span>
 <span class="n">data_ys</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
@@ -1669,7 +1668,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 </div>
 </div>
 <div class="section" id="Account-for-upper-limit-of-detection">
-<h2>Account for upper limit of detection<a class="headerlink" href="#Account-for-upper-limit-of-detection" title="Permalink to this headline">¶</a></h2>
+<h3>Account for upper limit of detection<a class="headerlink" href="#Account-for-upper-limit-of-detection" title="Permalink to this headline">¶</a></h3>
 <p>The results of our third attempt identified the fact that a feature missing from our prior was an upper threshold beyond which detectors were unable to register counts. Now, we implement a means of truncating the zero-inflated Poisson distribution, see <code class="docutils literal notranslate"><span class="pre">TruncatedZeroInflatedPoisson</span></code> below to reflect this newly recognized domain expertise. In principle, if we had done a better job of thinking through the physical constraints of this experiment, we could have identified this as an appropriate
 model in step one. In practice, there will almost always be something of this nature that is not accounted for in the initial incorporation of domain expertise into the model structure.</p>
 <div class="nbinput nblast docutils container">
@@ -1910,6 +1909,7 @@ model in step one. In practice, there will almost always be something of this na
 </div>
 </div>
 </div>
+</div>
 
           </div>
         </div>
@@ -1951,67 +1951,60 @@ model in step one. In practice, there will almost always be something of this na
 <h3><a href="../index.html">Table of Contents</a></h3>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting setup</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introductory review of applied probabilistic inference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#Setup">Setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Install-libraries">Install libraries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Add-latin-modern-fonts">Add latin modern fonts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Set-matplotlib-to-use-latin-modern-fonts">Set matplotlib to use latin modern fonts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introductory review of applied probabilistic inference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Setup">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Install-libraries">Install libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Add-latin-modern-fonts">Add latin modern fonts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Set-matplotlib-to-use-latin-modern-fonts">Set matplotlib to use latin modern fonts</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#Modeling-process">Modeling process</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Observing-the-world-through-the-lens-of-probability">Observing the world through the lens of probability</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Systems,-environments,-and-observations">Systems, environments, and observations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#The-space-of-observational-models-and-the-true-data-generating-process">The space of observational models and the true data generating process</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#The-observational-model">The observational model</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#The-true-data-generating-process">The true data generating process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Modeling-process">Modeling process</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Observing-the-world-through-the-lens-of-probability">Observing the world through the lens of probability</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Systems,-environments,-and-observations">Systems, environments, and observations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#The-space-of-observational-models-and-the-true-data-generating-process">The space of observational models and the true data generating process</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#The-practical-reality-of-model-construction">The practical reality of model construction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#The-process-of-inference">The process of inference</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Workflow-overview">Workflow overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Example-generative-models">Example generative models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Univariate-normal-model">Univariate normal model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Multivariate-normal-models">Multivariate normal models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#The-practical-reality-of-model-construction">The practical reality of model construction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#The-process-of-inference">The process of inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Workflow-overview">Workflow overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Example-generative-models">Example generative models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Univariate-normal-model">Univariate normal model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Multivariate-normal-models">Multivariate normal models</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow">“Build, compute, critique, repeat”: Box’s loop in iteration through Betancourt’s principled Bayesian workflow</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Load-libraries">Load libraries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#define-colors">define colors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow">“Build, compute, critique, repeat”: Box’s loop in iteration through Betancourt’s principled Bayesian workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Load-libraries">Load libraries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#define-colors">define colors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Poisson-process-for-arbitrary-detector-count-data">Poisson process for arbitrary detector count data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Sample-data">Sample data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Generative-model-specification">Generative model specification</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Prior">Prior</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Model">Model</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Simulation">Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Poisson-process-for-arbitrary-detector-count-data">Poisson process for arbitrary detector count data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Sample-data">Sample data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Generative-model-specification">Generative model specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Plot-prior-predictive-distribution">Plot prior predictive distribution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Fit-to-simulated-data">Fit to simulated data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Fit-observations-and-evaluate">Fit observations and evaluate</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#Plot-prior-predictive-distribution">Plot prior predictive distribution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Fit-to-simulated-data">Fit to simulated data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Fit-observations-and-evaluate">Fit observations and evaluate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Account-for-measurement-device-failure">Account for measurement device failure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Update-the-generative-model-specification">Update the generative model specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Simulate-the-updated-model">Simulate the updated model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Fit-Simulated-Observations-and-Evaluate">Fit Simulated Observations and Evaluate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Fit observations and evaluate</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Account-for-measurement-device-failure">Account for measurement device failure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Update-the-generative-model-specification">Update the generative model specification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Simulate-the-updated-model">Simulate the updated model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Fit-Simulated-Observations-and-Evaluate">Fit Simulated Observations and Evaluate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">Fit observations and evaluate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices">Account for the distinction between functioning and malfunctioning measurement devices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Update-the-generative-model">Update the generative model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Plot prior predictive distribution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Fit to simulated data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Fit observations and evaluate</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices">Account for the distinction between functioning and malfunctioning measurement devices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Update-the-generative-model">Update the generative model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Plot prior predictive distribution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Fit to simulated data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">Fit observations and evaluate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Account-for-upper-limit-of-detection">Account for upper limit of detection</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Account-for-upper-limit-of-detection">Account for upper limit of detection</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
