@@ -58,21 +58,21 @@ Test <cite data-cite="Welch2017-nv">Welch et al. (2017)</cite>.
 <!-- #endregion -->
 
 <!-- #region {"heading_collapsed": "true", "slideshow": {"slide_type": "slide"}, "tags": []} -->
-# Setup
+## Setup
 <!-- #endregion -->
 
-## Install libraries
+### Install libraries
 
 ```python slideshow={"slide_type": "fragment"} tags=[]
-# %run -i 'plotting.py'
+## %run -i 'plotting.py'
 ```
 
 ```python
-# !apt-get install -y fonts-lmodern
-# !pip install -q arviz numpyro
+## !apt-get install -y fonts-lmodern
+## !pip install -q arviz numpyro
 ```
 
-## Add latin modern fonts
+### Add latin modern fonts
 
 ```python
 import matplotlib.pyplot as plt
@@ -80,21 +80,21 @@ import matplotlib.font_manager
 ```
 
 ```python
-# fonts_path = "/usr/share/texmf/fonts/opentype/public/lm/" #ubuntu
-# fonts_path = "~/Library/Fonts/" # macos
+## fonts_path = "/usr/share/texmf/fonts/opentype/public/lm/" #ubuntu
+## fonts_path = "~/Library/Fonts/" # macos
 fonts_path = "/usr/share/fonts/OTF/" # arch
 matplotlib.font_manager.fontManager.addfont(fonts_path + "lmsans10-regular.otf")
 matplotlib.font_manager.fontManager.addfont(fonts_path + "lmroman10-regular.otf")
 ```
 
-## Set matplotlib to use latin modern fonts
+### Set matplotlib to use latin modern fonts
 
 ```python
 from IPython.display import set_matplotlib_formats
-#%matplotlib inline
+##%matplotlib inline
 set_matplotlib_formats('svg') # use SVG backend to maintain vectorization
 plt.style.use('default') #reset default parameters
-# https://stackoverflow.com/a/3900167/446907
+## https://stackoverflow.com/a/3900167/446907
 plt.rcParams.update({'font.size': 16,
                      'font.family': ['sans-serif'],
                      'font.serif': ['Latin Modern Roman'] + plt.rcParams['font.serif'],
@@ -102,15 +102,15 @@ plt.rcParams.update({'font.size': 16,
 ```
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-# Modeling process
+## Modeling process
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-## Observing the world through the lens of probability
+### Observing the world through the lens of probability
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Systems, environments, and observations
+#### Systems, environments, and observations
 
 <div>
 <center>    
@@ -120,11 +120,11 @@ plt.rcParams.update({'font.size': 16,
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### The space of observational models and the true data generating process
+#### The space of observational models and the true data generating process
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "fragment"}, "tags": []} -->
-#### The observational model
+##### The observational model
 * observation space: $Y$
 * arbitrary points in the observation space: $y$
 * explicitly realized observations from the observational process $\tilde{y}$
@@ -145,12 +145,12 @@ plt.rcParams.update({'font.size': 16,
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-#### The true data generating process
+##### The true data generating process
 * true data generating process: $\pi^{\dagger}$ is the probability distribution that exactly captures the observational process in a given application
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-## The practical reality of model construction
+### The practical reality of model construction
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "fragment"}} -->
@@ -161,7 +161,7 @@ plt.rcParams.update({'font.size': 16,
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-## The process of inference
+### The process of inference
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
@@ -176,7 +176,7 @@ How can we do our best to validate this process works as close as possible to pr
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-## Workflow overview
+### Workflow overview
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
@@ -187,11 +187,11 @@ How can we do our best to validate this process works as close as possible to pr
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-## Example generative models
+### Example generative models
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Univariate normal model
+#### Univariate normal model
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "fragment"}} -->
@@ -220,7 +220,7 @@ This comes from the library [bayespy](https://github.com/bayespy/bayespy/blob/de
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Multivariate normal models
+#### Multivariate normal models
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "fragment"}} -->
@@ -249,23 +249,23 @@ Note that these are for illustrative purposes of the manner in which our data ca
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-# "Build, compute, critique, repeat": Box's loop in iteration through Betancourt's principled Bayesian workflow
+## "Build, compute, critique, repeat": Box's loop in iteration through Betancourt's principled Bayesian workflow
 <!-- #endregion -->
 
-## Setup
+### Setup
 
 
-### Load libraries
+#### Load libraries
 
 ```python slideshow={"slide_type": "fragment"}
-# %pylab inline
+## %pylab inline
 import matplotlib.pyplot as plt
 import pandas as pd
 import scipy.stats as stats
 import seaborn as sns
 import numpy as np
-# plt.style.use(['seaborn-talk'])
-# plt.rcParams["figure.figsize"] = (10,8)
+## plt.style.use(['seaborn-talk'])
+## plt.rcParams["figure.figsize"] = (10,8)
 
 import arviz as az
 import jax
@@ -282,7 +282,7 @@ numpyro.set_host_device_count(4)
 ```
 
 <!-- #region {"slideshow": {"slide_type": "fragment"}} -->
-### define colors
+#### define colors
 <!-- #endregion -->
 
 ```python slideshow={"slide_type": "fragment"}
@@ -295,14 +295,14 @@ c_dark_highlight ="#7C0000"
 ```
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-## Poisson process for arbitrary detector count data
+### Poisson process for arbitrary detector count data
 <!-- 4.1 -->
 <!-- #endregion -->
 
 Below is an analysis of a data set of integer counts from a hypothetical series of experiments in which an ensemble of detectors is employed to count particles emitted from a radioactive specimen. We build a first candidate model that is consistent with the domain knowledge that such counts are integers and emissions are independent justifying experimentation with a Poisson process we hypothesize may account for the distribution of particle counts we observe in our sample data. We proceed in subsequent sections to critique and refine this model.
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Sample data
+#### Sample data
 <!-- #endregion -->
 
 ```python slideshow={"slide_type": "fragment"} tags=[]
@@ -312,10 +312,10 @@ df.shape
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Generative model specification
+#### Generative model specification
 <!-- #endregion -->
 
-#### Prior
+##### Prior
 
 ```python slideshow={"slide_type": "fragment"} tags=[]
 lbda  = np.linspace(0, 20, num=int(20/0.001))
@@ -334,7 +334,7 @@ plt.savefig("fig/prior-density-lambda.svg", bbox_inches="tight");
 !inkscape fig/prior-density-lambda.svg --export-filename=fig/prior-density-lambda.pdf 2>/dev/null
 ```
 
-#### Model
+##### Model
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
 In this case, the candidate _complete Bayesian model_ under consideration is given by
@@ -363,7 +363,7 @@ def model(y=None):
     return numpyro.sample("y", dist.Poisson(lbda).expand([N]), obs=y)
 ```
 
-#### Simulation
+##### Simulation
 
 ```python
 trace = Predictive(model, {}, num_samples=R)(jax.random.PRNGKey(0))
@@ -385,7 +385,7 @@ print(simu_ys.shape)
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Plot prior predictive distribution
+#### Plot prior predictive distribution
 <!-- #endregion -->
 
 ```python slideshow={"slide_type": "fragment"}
@@ -410,7 +410,7 @@ plt.title('Prior predictive distribution');
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Fit to simulated data
+#### Fit to simulated data
 <!-- #endregion -->
 
 [Betancourt, 2020](https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html#Step_Nine:_Fit_Simulated_Ensemble60) performs this for each `y` in trace.
@@ -426,11 +426,11 @@ az.plot_trace(trace);
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Fit observations and evaluate
+#### Fit observations and evaluate
 <!-- #endregion -->
 
 ```python slideshow={"slide_type": "fragment"}
-# df = pd.read_csv('data.csv')
+## df = pd.read_csv('data.csv')
 data_ys = df[df['data']=='y']['value'].values
 ```
 
@@ -474,12 +474,12 @@ plt.title('Posterior predictive distribution');
 ```
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-## Account for measurement device failure
+### Account for measurement device failure
 
 <!-- 4.2 -->
 <!-- #endregion -->
 
-### Update the generative model specification
+#### Update the generative model specification
 
 <!-- #region -->
 Recall the specification of our first attempt to model the detector count data with a [simple Poisson process model](poisson-process-for-arbitrary-detector-count-data)
@@ -505,7 +505,7 @@ def model2(y=None):
         "y", dist.ZeroInflatedPoisson(rate=lambda_, gate=1 - theta).expand([N]), obs=y)
 ```
 
-### Simulate the updated model
+#### Simulate the updated model
 
 ```python tags=[]
 trace = Predictive(model2, {}, num_samples=R)(jax.random.PRNGKey(0))
@@ -564,7 +564,7 @@ simu_ys[simu_ys > 25].size / simu_ys.size
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Fit Simulated Observations and Evaluate 
+#### Fit Simulated Observations and Evaluate 
 <!-- #endregion -->
 
 ```python slideshow={"slide_type": "fragment"} tags=[]
@@ -591,7 +591,7 @@ with open("fit_data2.pkl", "wb+") as buffer:
 ```
 
 <!-- #region {"tags": []} -->
-### Fit observations and evaluate
+#### Fit observations and evaluate
 <!-- #endregion -->
 
 ```python tags=[]
@@ -634,12 +634,12 @@ plt.title('Posterior predictive distribution');
 ```
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-## Account for the distinction between functioning and malfunctioning measurement devices
+### Account for the distinction between functioning and malfunctioning measurement devices
 <!-- 4.3 -->
 <!-- #endregion -->
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Update the generative model
+#### Update the generative model
 <!-- #endregion -->
 
 Build a model that generates zero-inflated Poisson counts and update the `HalfNormal` prior, which, in combination with the zero-inflated Poisson distribution, leaves too much probability mass near zero. Here we use an `InverseGamma` prior with hyperparameter settings that leave $\approx 1\%$ of the probability mass below a detector count of $1$ and similarly allows for $\approx 1\%$ of the mass above $15$. $1$ and $15$ are on the arbitrary integral detector count scale implied here by knowledge of the manufacturing specifications of the hypothetical detector devices.
@@ -703,7 +703,7 @@ simu_ys = trace['y']
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Plot prior predictive distribution
+#### Plot prior predictive distribution
 <!-- #endregion -->
 
 ```python slideshow={"slide_type": "fragment"}
@@ -728,7 +728,7 @@ plt.title('Prior predictive distribution');
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Fit to simulated data
+#### Fit to simulated data
 <!-- #endregion -->
 
 In the example, Betancourt performs this for each `y` in trace. Here we only compute this for one element of the trace.
@@ -747,11 +747,11 @@ az.plot_trace(trace);
 ```
 
 <!-- #region {"slideshow": {"slide_type": "subslide"}} -->
-### Fit observations and evaluate
+#### Fit observations and evaluate
 <!-- #endregion -->
 
 ```python slideshow={"slide_type": "fragment"}
-# df = pd.read_csv('data.csv')
+## df = pd.read_csv('data.csv')
 data_ys = df[df['data']=='y']['value'].values
 ```
 
@@ -795,7 +795,7 @@ plt.title('Posterior predictive distribution');
 ```
 
 <!-- #region {"slideshow": {"slide_type": "slide"}} -->
-## Account for upper limit of detection
+### Account for upper limit of detection
 <!-- #endregion -->
 
 The results of our third attempt identified the fact that a feature missing from our prior was an upper threshold beyond which detectors were unable to register counts. Now, we implement a means of truncating the zero-inflated Poisson distribution, see `TruncatedZeroInflatedPoisson` below to reflect this newly recognized domain expertise. In principle, if we had done a better job of thinking through the physical constraints of this experiment, we could have identified this as an appropriate model in step one. In practice, there will almost always be something of this nature that is not accounted for in the initial incorporation of domain expertise into the model structure.
