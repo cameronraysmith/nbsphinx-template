@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 master_doc = 'index'
 
-project = 'Test nbsphinx'
+project = 'nbsphinx template'
 copyright = '2021, Cameron Smith'
 author = 'Cameron Smith'
 
@@ -53,8 +53,8 @@ nbsphinx_prolog = r"""
 
     <div class="admonition note">
       This page was generated from
-      <a class="reference external" href="https://github.com/cameronraysmith/test-nbsphinx/blob/{{ env.config.release|e }}/{{ docname|e }}">{{ docname|e }}</a>.
-      <span style="white-space: nowrap;"><a href="https://mybinder.org/v2/gh/cameronraysmith/test-nbsphinx/{{ env.config.release|e }}?filepath={{ docname|e }}"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a></span>
+      <a class="reference external" href="https://github.com/cameronraysmith/nbsphinx-template/blob/master/{{ docname|e }}">{{ docname|e }}</a>.
+      <span style="white-space: nowrap;"><a href="https://mybinder.org/v2/gh/cameronraysmith/nbsphinx-template/master?filepath={{ docname|e }}"><img alt="Binder badge" src="https://mybinder.org/badge_logo.svg" style="vertical-align:text-bottom"></a> or </span>
       <script>
         if (document.location.host) {
           $(document.currentScript).replaceWith(
@@ -63,7 +63,7 @@ nbsphinx_prolog = r"""
             (window.location.protocol == 'https:' ? 's/' : '/') +
             window.location.host +
             window.location.pathname.slice(0, -4) +
-            'ipynb"> or <em>nbviewer</em></a>.'
+            'ipynb"><em>nbviewer</em></a>.'
           );
         }
       </script>
