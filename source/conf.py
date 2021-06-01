@@ -31,7 +31,7 @@ author = 'Cameron Smith'
 extensions = [
     'nbsphinx',
     'sphinxcontrib.bibtex',        # for bibliographic references
-    'sphinx_copybutton',           # for adding “copy to clipboard” buttons to all text/code boxes
+#     'sphinx_copybutton',           # for adding “copy to clipboard” buttons to all text/code boxes | commented due to multiple scrollbar issue https://github.com/cameronraysmith/nbsphinx-template/issues/1
     'sphinxcontrib.rsvgconverter', # for SVG->PDF conversion in LaTeX output
     # 'sphinx_last_updated_by_git',  # get "last updated" from Git
 ]
