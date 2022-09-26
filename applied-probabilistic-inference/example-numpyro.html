@@ -3,7 +3,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
     <title>Introductory review of applied probabilistic inference &#8212; nbsphinx template</title>
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/insipid.css" type="text/css" />
@@ -16,7 +17,7 @@
     <script src="../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
     <script defer src="../_static/insipid.js"></script>
     <script defer src="../_static/insipid-sidebar.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -25,36 +26,41 @@
     <link rel="prev" title="Plotting setup" href="../plotting.html" />
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-  </head>
-  <body class="sidebar-visible">
+  </head><body>
     <script type="text/javascript">
-        (function() {
-            var $body = $(document.body);
-            $body.addClass('js');
-            $body.addClass('sidebar-resizing');  // avoid transitions on load
-            $body.removeClass('sidebar-visible');
-            try {
-                var sidebar = localStorage.getItem('sphinx-sidebar');
-                if (sidebar === 'visible') {
-                    $body.addClass('sidebar-visible');
-                }
-                var sidebar_width = localStorage.getItem('sphinx-sidebar-width');
-                if (sidebar_width) {
-                    $(':root').css('--sidebar-width', sidebar_width);
-                }
-            } catch(e) {
+        document.body.classList.add('js');
+    </script>
+    <input type="checkbox" id="sidebar-checkbox" style="display: none;">
+    <label id="overlay" for="sidebar-checkbox"></label>
+    <div class="sidebar-resize-handle"></div>
+    <script type="text/javascript">
+        try {
+            let sidebar = localStorage.getItem('sphinx-sidebar');
+            const sidebar_width = localStorage.getItem('sphinx-sidebar-width');
+            if (sidebar_width) {
+                document.documentElement.style.setProperty('--sidebar-width', sidebar_width);
             }
-        })();
+            // show sidebar on wide screen
+            if (!sidebar && window.matchMedia('(min-width: 100rem)').matches) {
+                sidebar = 'visible';
+                // NB: We don't store the value in localStorage!
+            }
+            if (sidebar === 'visible') {
+                document.getElementById('sidebar-checkbox').checked = true;
+            }
+        } catch(e) {
+            console.info(e);
+        }
     </script>
     <header id="topbar-placeholder">
       <div id="topbar">
         <div id="titlebar">
           <div class="buttons">
-            <button id="sidebar-button" type="button" aria-controls="sphinxsidebar" accesskey="M">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
-            </button>
+            <label for="sidebar-checkbox" id="sidebar-button" role="button" tabindex="0" aria-controls="sphinxsidebar" accesskey="M">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+            </label>
             <button id="search-button" type="button" title="Search" aria-label="Search" aria-expanded="false" aria-controls="search-form" accesskey="S">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
             </button>
           </div>
           <div class="title">
@@ -64,17 +70,17 @@
           <div class="buttons">
             <button id="fullscreen-button" type="button" aria-hidden="true">
               <span class="enable">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M212.686 315.314L120 408l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C10.697 480 0 469.255 0 456V344c0-21.382 25.803-32.09 40.922-16.971L72 360l92.686-92.686c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.249 6.248 6.249 16.378 0 22.627zm22.628-118.628L328 104l-32.922-31.029C279.958 57.851 290.666 32 312.048 32h112C437.303 32 448 42.745 448 56v112c0 21.382-25.803 32.09-40.922 16.971L376 152l-92.686 92.686c-6.248 6.248-16.379 6.248-22.627 0l-25.373-25.373c-6.249-6.248-6.249-16.378 0-22.627z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M212.686 315.314L120 408l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C10.697 480 0 469.255 0 456V344c0-21.382 25.803-32.09 40.922-16.971L72 360l92.686-92.686c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.249 6.248 6.249 16.378 0 22.627zm22.628-118.628L328 104l-32.922-31.029C279.958 57.851 290.666 32 312.048 32h112C437.303 32 448 42.745 448 56v112c0 21.382-25.803 32.09-40.922 16.971L376 152l-92.686 92.686c-6.248 6.248-16.379 6.248-22.627 0l-25.373-25.373c-6.249-6.248-6.249-16.378 0-22.627z"/></svg>
               </span>
               <span class="disable">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M4.686 427.314L104 328l-32.922-31.029C55.958 281.851 66.666 256 88.048 256h112C213.303 256 224 266.745 224 280v112c0 21.382-25.803 32.09-40.922 16.971L152 376l-99.314 99.314c-6.248 6.248-16.379 6.248-22.627 0L4.686 449.941c-6.248-6.248-6.248-16.379 0-22.627zM443.314 84.686L344 184l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C234.697 256 224 245.255 224 232V120c0-21.382 25.803-32.09 40.922-16.971L296 136l99.314-99.314c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.248 6.248 6.248 16.379 0 22.627z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M4.686 427.314L104 328l-32.922-31.029C55.958 281.851 66.666 256 88.048 256h112C213.303 256 224 266.745 224 280v112c0 21.382-25.803 32.09-40.922 16.971L152 376l-99.314 99.314c-6.248 6.248-16.379 6.248-22.627 0L4.686 449.941c-6.248-6.248-6.248-16.379 0-22.627zM443.314 84.686L344 184l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C234.697 256 224 245.255 224 232V120c0-21.382 25.803-32.09 40.922-16.971L296 136l99.314-99.314c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.248 6.248 6.248 16.379 0 22.627z"/></svg>
               </span>
             </button>
           </div>
         </div>
         <div id="searchbox" role="search">
           <form id="search-form" class="search" style="display: none" action="../search.html" method="get">
-            <input type="search" name="q" placeholder="Search ..." />
+            <input type="search" name="q" placeholder="Search ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
             <button>Go</button>
           </form>
         </div>
@@ -82,17 +88,17 @@
     </header>
     <nav>
       <a href="../plotting.html" class="nav-icon previous" title="previous:&#13;Plotting setup" aria-label="Previous topic" accesskey="P" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>
       </a>
       <a href="../references.html" class="nav-icon next" title="next:&#13;References" aria-label="Next topic" accesskey="N" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg>
       </a>
     </nav>
 
     <nav class="relbar">
       <a class="previous" href="../plotting.html" aria-label="Previous topic" >
         <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
         </div>
         <div class="title">
           <span class="text">
@@ -109,10 +115,10 @@
           </span>
         </div>
         <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
         </div>
       </a>
-    </nav>
+    </nav>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -329,11 +335,12 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -342,10 +349,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -357,12 +368,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -383,7 +397,7 @@ div.rendered_html tbody tr:hover {
       );
     }
   </script>
-</div><!-- <center><font size="+4">Introductory review of applied probabilistic inference</font></center> --><div class="section" id="Introductory-review-of-applied-probabilistic-inference">
+</div><!-- <center><font size="+4">Introductory review of applied probabilistic inference</font></center> --><section id="Introductory-review-of-applied-probabilistic-inference">
 <h1>Introductory review of applied probabilistic inference<a class="headerlink" href="#Introductory-review-of-applied-probabilistic-inference" title="Permalink to this headline">¶</a></h1>
 <p>The following notes borrow heavily from and are <em>thoroughly</em> based on Michael Betancourt’s developments that put forth a principled Bayesian workflow. The following references were integrated to produce this document:</p>
 <ul class="simple">
@@ -395,17 +409,16 @@ div.rendered_html tbody tr:hover {
 <li><p><a class="reference external" href="https://github.com/jluttine/tikz-bayesnet">tikz-bayesnet</a> library <a class="reference external" href="https://github.com/jluttine/tikz-bayesnet/blob/master/dietz-techreport.pdf">technical report</a></p></li>
 </ul>
 <p>The implementation of the modelling and inference translated from <a class="reference external" href="https://github.com/lstmemery/principled-bayesian-workflow-pymc3">lstmemery’s pymc3 implementation of Betancourt’s principled Bayesian workflow</a> to <a class="reference external" href="http://num.pyro.ai/en/stable/">numpyro</a> is by <a class="reference external" href="https://fehiepsi.github.io/">Du Phan</a>.</p>
-<p>Test <span id="id1">[<a class="reference internal" href="../references.html#id3">WHP17</a>]</span>.</p>
-<div class="section" id="Setup">
+<p>Test <span id="pending-xref-1">[<a class="reference internal" href="../references.html#citation-2" title="Joshua D Welch, Alexander J Hartemink, and Jan F Prins. MATCHER: manifold alignment reveals correspondence between single cell transcriptome and epigenome dynamics. Genome Biol., 18(1):138, July 2017. doi:10.1186/s13059-017-1269-0.">WHP17</a>]</span>.</p>
+<section id="Setup">
 <h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Install-libraries">
+<section id="Install-libraries">
 <h3>Install libraries<a class="headerlink" href="#Install-libraries" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">## %run -i &#39;plotting.py&#39;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## %run -i &#39;plotting.py&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -413,21 +426,19 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">## !apt-get install -y fonts-lmodern</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## !apt-get install -y fonts-lmodern</span>
 <span class="c1">## !pip install -q arviz numpyro</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Add-latin-modern-fonts">
+</section>
+<section id="Add-latin-modern-fonts">
 <h3>Add latin modern fonts<a class="headerlink" href="#Add-latin-modern-fonts" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.font_manager</span>
 </pre></div>
 </div>
@@ -436,8 +447,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">## fonts_path = &quot;/usr/share/texmf/fonts/opentype/public/lm/&quot; #ubuntu</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## fonts_path = &quot;/usr/share/texmf/fonts/opentype/public/lm/&quot; #ubuntu</span>
 <span class="c1">## fonts_path = &quot;~/Library/Fonts/&quot; # macos</span>
 <span class="n">fonts_path</span> <span class="o">=</span> <span class="s2">&quot;/usr/share/fonts/OTF/&quot;</span> <span class="c1"># arch</span>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">font_manager</span><span class="o">.</span><span class="n">fontManager</span><span class="o">.</span><span class="n">addfont</span><span class="p">(</span><span class="n">fonts_path</span> <span class="o">+</span> <span class="s2">&quot;lmsans10-regular.otf&quot;</span><span class="p">)</span>
@@ -445,15 +455,14 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Set-matplotlib-to-use-latin-modern-fonts">
+</section>
+<section id="Set-matplotlib-to-use-latin-modern-fonts">
 <h3>Set matplotlib to use latin modern fonts<a class="headerlink" href="#Set-matplotlib-to-use-latin-modern-fonts" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
 <span class="c1">##%matplotlib inline</span>
 <span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span> <span class="c1"># use SVG backend to maintain vectorization</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span> <span class="c1">#reset default parameters</span>
@@ -474,19 +483,19 @@ div.rendered_html tbody tr:hover {
   set_matplotlib_formats(&#39;svg&#39;) # use SVG backend to maintain vectorization
 </pre></div></div>
 </div>
-</div>
-</div>
-<div class="section" id="Modeling-process">
+</section>
+</section>
+<section id="Modeling-process">
 <h2>Modeling process<a class="headerlink" href="#Modeling-process" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Observing-the-world-through-the-lens-of-probability">
+<section id="Observing-the-world-through-the-lens-of-probability">
 <h3>Observing the world through the lens of probability<a class="headerlink" href="#Observing-the-world-through-the-lens-of-probability" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="Systems,-environments,-and-observations">
+<section id="Systems,-environments,-and-observations">
 <h4>Systems, environments, and observations<a class="headerlink" href="#Systems,-environments,-and-observations" title="Permalink to this headline">¶</a></h4>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_probes/multiple_probes.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_probes/multiple_probes.png" style="width: 90%;" /></a> <a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_observational_processes/multiple_observational_processes.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/observational_process/multiple_observational_processes/multiple_observational_processes.png" style="width: 90%;" /></a></p>
-</center></div></div>
-<div class="section" id="The-space-of-observational-models-and-the-true-data-generating-process">
+</center></div></section>
+<section id="The-space-of-observational-models-and-the-true-data-generating-process">
 <h4>The space of observational models and the true data generating process<a class="headerlink" href="#The-space-of-observational-models-and-the-true-data-generating-process" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="The-observational-model">
+<section id="The-observational-model">
 <h5>The observational model<a class="headerlink" href="#The-observational-model" title="Permalink to this headline">¶</a></h5>
 <ul class="simple">
 <li><p>observation space: <span class="math notranslate nohighlight">\(Y\)</span></p></li>
@@ -499,31 +508,31 @@ div.rendered_html tbody tr:hover {
 <li><p>probability density for an observational model: <span class="math notranslate nohighlight">\(\pi_{\mathcal{S}}(y; s)\)</span> in general using the parametrization to assign <span class="math notranslate nohighlight">\(\pi_{\mathcal{S}}(y; \theta)\)</span></p></li>
 </ul>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world/small_world.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world/small_world.png" style="width: 45%;" /></a> <a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_one/small_world_one.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_one/small_world_one.png" style="width: 45%;" /></a></p>
-</center></div></div>
-<div class="section" id="The-true-data-generating-process">
+</center></div></section>
+<section id="The-true-data-generating-process">
 <h5>The true data generating process<a class="headerlink" href="#The-true-data-generating-process" title="Permalink to this headline">¶</a></h5>
 <ul class="simple">
 <li><p>true data generating process: <span class="math notranslate nohighlight">\(\pi^{\dagger}\)</span> is the probability distribution that exactly captures the observational process in a given application</p></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="The-practical-reality-of-model-construction">
+</section>
+</section>
+</section>
+<section id="The-practical-reality-of-model-construction">
 <h3>The practical reality of model construction<a class="headerlink" href="#The-practical-reality-of-model-construction" title="Permalink to this headline">¶</a></h3>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_two/small_world_two.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/small_world/small_world_two/small_world_two.png" style="width: 75%;" /></a></p>
-</center></div></div>
-<div class="section" id="The-process-of-inference">
+</center></div></section>
+<section id="The-process-of-inference">
 <h3>The process of inference<a class="headerlink" href="#The-process-of-inference" title="Permalink to this headline">¶</a></h3>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/model_config/model_config5/model_config5.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/modeling_and_inference/figures/inferential_config/model_config/model_config5/model_config5.png" style="width: 90%;" /></a></p>
 </center></div><p>How can we do our best to validate this process works as close as possible to providing a high quality mirror for natural systems?</p>
-</div>
-<div class="section" id="Workflow-overview">
+</section>
+<section id="Workflow-overview">
 <h3>Workflow overview<a class="headerlink" href="#Workflow-overview" title="Permalink to this headline">¶</a></h3>
 <div><center><p><a class="no-scaled-link reference internal" href="https://github.com/betanalpha/knitr_case_studies/raw/master/principled_bayesian_workflow/figures/workflow/all/all.png"><img alt="Drawing" class="no-scaled-link" src="https://github.com/betanalpha/knitr_case_studies/raw/master/principled_bayesian_workflow/figures/workflow/all/all.png" style="width: 70%;" /></a></p>
-</center></div></div>
-<div class="section" id="Example-generative-models">
+</center></div></section>
+<section id="Example-generative-models">
 <h3>Example generative models<a class="headerlink" href="#Example-generative-models" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="Univariate-normal-model">
+<section id="Univariate-normal-model">
 <h4>Univariate normal model<a class="headerlink" href="#Univariate-normal-model" title="Permalink to this headline">¶</a></h4>
 <p>From a very simple perspective, generative modeling refers to the situation in which we develop a candidate probabilistic specification of the process from which our data are generated. Usually this will include the specification of prior distributions over all first-order parameters.</p>
 <div><center><p><a class="no-scaled-link reference internal" href="https://www.bayespy.org/_images/tikz-57bc0c88a2974f4c1e2335fe9edb88ff2efdf970.png"><img alt="Drawing" class="no-scaled-link" src="https://www.bayespy.org/_images/tikz-57bc0c88a2974f4c1e2335fe9edb88ff2efdf970.png" style="width: 10%;" /></a></p>
@@ -535,8 +544,8 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 \end{split}
 \end{equation*}</span></p>
 <p>This comes from the library <a class="reference external" href="https://github.com/bayespy/bayespy/blob/develop/doc/source/user_guide/quickstart.rst">bayespy</a>. The best description we are aware of regarding the syntax and semantics of graphical models via factor graph notation is in the <a class="reference external" href="https://github.com/jluttine/tikz-bayesnet">tikz-bayesnet</a> library <a class="reference external" href="https://github.com/jluttine/tikz-bayesnet/blob/master/dietz-techreport.pdf">technical report</a>.</p>
-</div>
-<div class="section" id="Multivariate-normal-models">
+</section>
+<section id="Multivariate-normal-models">
 <h4>Multivariate normal models<a class="headerlink" href="#Multivariate-normal-models" title="Permalink to this headline">¶</a></h4>
 <div><center><p><a class="no-scaled-link reference internal" href="https://www.bayespy.org/_images/tikz-80a1db369be1f25b61ceacfff551dae2bdd331c3.png"><img alt="Drawing" class="no-scaled-link" src="https://www.bayespy.org/_images/tikz-80a1db369be1f25b61ceacfff551dae2bdd331c3.png" style="width: 10%;" /></a></p>
 </center></div><div class="math notranslate nohighlight">
@@ -546,21 +555,20 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 \[\mathbf{y}_{mn} \sim \mathcal{N}(\boldsymbol{\mu}_m,
 \mathbf{\Lambda}_n),\qquad m=0,\ldots,9, \quad n=0,\ldots,29.\]</div>
 <p>Note that these are for illustrative purposes of the manner in which our data can share parameters and we have not yet defined priors over our parameters.</p>
-</div>
-</div>
-</div>
-<div class="section" id="“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow">
+</section>
+</section>
+</section>
+<section id="“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow">
 <h2>“Build, compute, critique, repeat”: Box’s loop in iteration through Betancourt’s principled Bayesian workflow<a class="headerlink" href="#“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id2">
-<h3>Setup<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="Load-libraries">
+<section id="setup-1">
+<h3>Setup<a class="headerlink" href="#setup-1" title="Permalink to this headline">¶</a></h3>
+<section id="Load-libraries">
 <h4>Load libraries<a class="headerlink" href="#Load-libraries" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">## %pylab inline</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## %pylab inline</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
@@ -594,15 +602,14 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 0.11.2
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="define-colors">
+</section>
+<section id="define-colors">
 <h4>define colors<a class="headerlink" href="#define-colors" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">c_light</span> <span class="o">=</span><span class="s2">&quot;#DCBCBC&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_light</span> <span class="o">=</span><span class="s2">&quot;#DCBCBC&quot;</span>
 <span class="n">c_light_highlight</span> <span class="o">=</span><span class="s2">&quot;#C79999&quot;</span>
 <span class="n">c_mid</span> <span class="o">=</span><span class="s2">&quot;#B97C7C&quot;</span>
 <span class="n">c_mid_highlight</span> <span class="o">=</span><span class="s2">&quot;#A25050&quot;</span>
@@ -611,20 +618,19 @@ p(\tau) &= \mathcal{G}(\tau|10^{-6},10^{-6})
 </pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="Poisson-process-for-arbitrary-detector-count-data">
+</section>
+</section>
+<section id="Poisson-process-for-arbitrary-detector-count-data">
 <h3>Poisson process for arbitrary detector count data<a class="headerlink" href="#Poisson-process-for-arbitrary-detector-count-data" title="Permalink to this headline">¶</a></h3>
 <!-- 4.1 --><p>Below is an analysis of a data set of integer counts from a hypothetical series of experiments in which an ensemble of detectors is employed to count particles emitted from a radioactive specimen. We build a first candidate model that is consistent with the domain knowledge that such counts are integers and emissions are independent justifying experimentation with a Poisson process we hypothesize may account for the distribution of particle counts we observe in our sample data. We proceed in
 subsequent sections to critique and refine this model.</p>
-<div class="section" id="Sample-data">
+<section id="Sample-data">
 <h4>Sample data<a class="headerlink" href="#Sample-data" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/cameronraysmith/applied-probabilistic-inference/master/data.csv&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/cameronraysmith/applied-probabilistic-inference/master/data.csv&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
 <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
@@ -655,17 +661,16 @@ subsequent sections to critique and refine this model.</p>
 (1001, 2)
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Generative-model-specification">
+</section>
+<section id="Generative-model-specification">
 <h4>Generative model specification<a class="headerlink" href="#Generative-model-specification" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="Prior">
+<section id="Prior">
 <h5>Prior<a class="headerlink" href="#Prior" title="Permalink to this headline">¶</a></h5>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">lbda</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="mf">0.001</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lbda</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="mf">0.001</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lbda</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mf">6.44787</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">lbda</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="n">c_dark_highlight</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;lambda&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Prior Density&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([]);</span>
@@ -688,13 +693,12 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">!</span>inkscape fig/prior-density-lambda.svg --export-filename<span class="o">=</span>fig/prior-density-lambda.pdf <span class="m">2</span>&gt;/dev/null
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>inkscape fig/prior-density-lambda.svg --export-filename<span class="o">=</span>fig/prior-density-lambda.pdf <span class="m">2</span>&gt;/dev/null
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Model">
+</section>
+<section id="Model">
 <h5>Model<a class="headerlink" href="#Model" title="Permalink to this headline">¶</a></h5>
 <p>In this case, the candidate <em>complete Bayesian model</em> under consideration is given by</p>
 <div class="math notranslate nohighlight">
@@ -707,8 +711,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">500</span>
 
 <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -717,15 +720,14 @@ subsequent sections to critique and refine this model.</p>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Simulation">
+</section>
+<section id="Simulation">
 <h5>Simulation<a class="headerlink" href="#Simulation" title="Permalink to this headline">¶</a></h5>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -733,8 +735,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">simu_lbdas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;lbda&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simu_lbdas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;lbda&#39;</span><span class="p">]</span>
 <span class="n">simu_ys</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -743,8 +744,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">simu_lbdas</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simu_lbdas</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">simu_lbdas</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -763,8 +763,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">simu_ys</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simu_ys</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">simu_ys</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -784,16 +783,15 @@ subsequent sections to critique and refine this model.</p>
 (500, 1000)
 </pre></div></div>
 </div>
-</div>
-</div>
-<div class="section" id="Plot-prior-predictive-distribution">
+</section>
+</section>
+<section id="Plot-prior-predictive-distribution">
 <h4>Plot prior predictive distribution<a class="headerlink" href="#Plot-prior-predictive-distribution" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">hists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">simu_ys</span><span class="p">)</span>
@@ -807,8 +805,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bin_interp</span><span class="p">,</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">,:],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">);</span>
 
 
@@ -825,16 +822,15 @@ subsequent sections to critique and refine this model.</p>
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_62_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_62_0.svg" /></div>
 </div>
-</div>
-<div class="section" id="Fit-to-simulated-data">
+</section>
+<section id="Fit-to-simulated-data">
 <h4>Fit to simulated data<a class="headerlink" href="#Fit-to-simulated-data" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html#Step_Nine:_Fit_Simulated_Ensemble60">Betancourt, 2020</a> performs this for each <code class="docutils literal notranslate"><span class="pre">y</span></code> in trace.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">mcmc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">simu_ys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
 <span class="n">trace</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">group_by_chain</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -856,8 +852,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -867,15 +862,14 @@ subsequent sections to critique and refine this model.</p>
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_66_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_66_0.svg" /></div>
 </div>
-</div>
-<div class="section" id="Fit-observations-and-evaluate">
+</section>
+<section id="Fit-observations-and-evaluate">
 <h4>Fit observations and evaluate<a class="headerlink" href="#Fit-observations-and-evaluate" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">## df = pd.read_csv(&#39;data.csv&#39;)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## df = pd.read_csv(&#39;data.csv&#39;)</span>
 <span class="n">data_ys</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
@@ -884,8 +878,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">mcmc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">data_ys</span><span class="p">)</span>
 <span class="n">trace</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">group_by_chain</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -919,8 +912,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -934,8 +926,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -943,8 +934,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">hists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ppc</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
@@ -961,8 +951,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bin_interp</span><span class="p">,</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">,:],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">);</span>
 
 
@@ -980,11 +969,11 @@ subsequent sections to critique and refine this model.</p>
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_73_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_73_0.svg" /></div>
 </div>
-</div>
-</div>
-<div class="section" id="Account-for-measurement-device-failure">
+</section>
+</section>
+<section id="Account-for-measurement-device-failure">
 <h3>Account for measurement device failure<a class="headerlink" href="#Account-for-measurement-device-failure" title="Permalink to this headline">¶</a></h3>
-<!-- 4.2 --><div class="section" id="Update-the-generative-model-specification">
+<!-- 4.2 --><section id="Update-the-generative-model-specification">
 <h4>Update the generative model specification<a class="headerlink" href="#Update-the-generative-model-specification" title="Permalink to this headline">¶</a></h4>
 <p>Recall the specification of our first attempt to model the detector count data with a <a class="reference external" href="poisson-process-for-arbitrary-detector-count-data">simple Poisson process model</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -1000,8 +989,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="k">def</span> <span class="nf">model2</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1012,15 +1000,14 @@ subsequent sections to critique and refine this model.</p>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="Simulate-the-updated-model">
+</section>
+<section id="Simulate-the-updated-model">
 <h4>Simulate the updated model<a class="headerlink" href="#Simulate-the-updated-model" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1028,8 +1015,7 @@ subsequent sections to critique and refine this model.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trace</span><span class="p">[</span><span class="s2">&quot;theta&quot;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">[</span><span class="s2">&quot;theta&quot;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1047,8 +1033,7 @@ DeviceArray([0.8672242 , 0.31337017, 0.5007059 , 0.5511668 , 0.38925606,
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trace</span><span class="p">[</span><span class="s2">&quot;lambda&quot;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span><span class="p">[</span><span class="s2">&quot;lambda&quot;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1066,8 +1051,7 @@ DeviceArray([ 8.611058 ,  1.9441426,  8.545718 ,  4.5276327,  8.939901 ,
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">simu_ys</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simu_ys</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
 <span class="n">simu_ys</span>
 </pre></div>
 </div>
@@ -1092,8 +1076,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">simu_ys</span><span class="p">[</span><span class="n">simu_ys</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="n">simu_ys</span><span class="o">.</span><span class="n">size</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simu_ys</span><span class="p">[</span><span class="n">simu_ys</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="n">simu_ys</span><span class="o">.</span><span class="n">size</span>
 </pre></div>
 </div>
 </div>
@@ -1110,8 +1093,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="n">simu_ys</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simu_ys</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">simu_ys</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1137,8 +1119,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 
@@ -1172,8 +1153,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">simu_ys</span><span class="p">[</span><span class="n">simu_ys</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="n">simu_ys</span><span class="o">.</span><span class="n">size</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simu_ys</span><span class="p">[</span><span class="n">simu_ys</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="n">simu_ys</span><span class="o">.</span><span class="n">size</span>
 </pre></div>
 </div>
 </div>
@@ -1186,15 +1166,14 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 0.000294
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="Fit-Simulated-Observations-and-Evaluate">
+</section>
+<section id="Fit-Simulated-Observations-and-Evaluate">
 <h4>Fit Simulated Observations and Evaluate<a class="headerlink" href="#Fit-Simulated-Observations-and-Evaluate" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model2</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -1219,8 +1198,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace_fit</span><span class="p">);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace_fit</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1234,8 +1212,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">numpyro</span><span class="o">.</span><span class="n">diagnostics</span><span class="o">.</span><span class="n">print_summary</span><span class="p">(</span><span class="n">trace_fit</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numpyro</span><span class="o">.</span><span class="n">diagnostics</span><span class="o">.</span><span class="n">print_summary</span><span class="p">(</span><span class="n">trace_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1255,22 +1232,20 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;fit_data2.pkl&quot;</span><span class="p">,</span> <span class="s2">&quot;wb+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">buffer</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model2</span><span class="p">,</span> <span class="s2">&quot;trace&quot;</span><span class="p">:</span> <span class="n">trace_fit</span><span class="p">},</span> <span class="n">buffer</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="id3">
-<h4>Fit observations and evaluate<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="fit-observations-and-evaluate-1">
+<h4>Fit observations and evaluate<a class="headerlink" href="#fit-observations-and-evaluate-1" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model2</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model2</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">mcmc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">data_ys</span><span class="p">)</span>
 <span class="n">trace</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">group_by_chain</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -1304,8 +1279,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hist&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1319,8 +1293,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model2</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1328,8 +1301,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">hists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ppc</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
@@ -1346,8 +1318,7 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bin_interp</span><span class="p">,</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">,:],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">);</span>
 
 
@@ -1365,11 +1336,11 @@ DeviceArray([[ 6, 13, 12, ..., 10, 10, 10],
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_98_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_98_0.svg" /></div>
 </div>
-</div>
-</div>
-<div class="section" id="Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices">
+</section>
+</section>
+<section id="Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices">
 <h3>Account for the distinction between functioning and malfunctioning measurement devices<a class="headerlink" href="#Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices" title="Permalink to this headline">¶</a></h3>
-<!-- 4.3 --><div class="section" id="Update-the-generative-model">
+<!-- 4.3 --><section id="Update-the-generative-model">
 <h4>Update the generative model<a class="headerlink" href="#Update-the-generative-model" title="Permalink to this headline">¶</a></h4>
 <p>Build a model that generates zero-inflated Poisson counts and update the <code class="docutils literal notranslate"><span class="pre">HalfNormal</span></code> prior, which, in combination with the zero-inflated Poisson distribution, leaves too much probability mass near zero. Here we use an <code class="docutils literal notranslate"><span class="pre">InverseGamma</span></code> prior with hyperparameter settings that leave <span class="math notranslate nohighlight">\(\approx 1\%\)</span> of the probability mass below a detector count of <span class="math notranslate nohighlight">\(1\)</span> and similarly allows for <span class="math notranslate nohighlight">\(\approx 1\%\)</span> of the mass above <span class="math notranslate nohighlight">\(15\)</span>. <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(15\)</span> are on the arbitrary integral
 detector count scale implied here by knowledge of the manufacturing specifications of the hypothetical detector devices.</p>
@@ -1377,8 +1348,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">lbda</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="mf">0.001</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lbda</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="o">/</span><span class="mf">0.001</span><span class="p">))</span>
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">invgamma</span><span class="p">(</span><span class="mf">3.48681</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mf">9.21604</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lbda</span><span class="p">,</span> <span class="n">pdf</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">lbda</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="n">c_dark_highlight</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;lambda&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Prior Density&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([]);</span>
@@ -1399,8 +1369,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">theta</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">0.001</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mf">0.001</span><span class="p">))</span>
 <span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mf">2.8663</span><span class="p">,</span><span class="mf">2.8663</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">pdf</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="n">c_dark_highlight</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;theta&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Prior Density&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([]);</span>
@@ -1432,8 +1401,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="k">def</span> <span class="nf">model3</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1448,8 +1416,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model3</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model3</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1457,22 +1424,20 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">simu_lbdas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;lbda&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simu_lbdas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;lbda&#39;</span><span class="p">]</span>
 <span class="n">simu_thetas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">]</span>
 <span class="n">simu_ys</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="id4">
-<h4>Plot prior predictive distribution<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="plot-prior-predictive-distribution-1">
+<h4>Plot prior predictive distribution<a class="headerlink" href="#plot-prior-predictive-distribution-1" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">hists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">simu_ys</span><span class="p">)</span>
@@ -1486,8 +1451,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bin_interp</span><span class="p">,</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">,:],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">);</span>
 
 
@@ -1504,16 +1468,15 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_110_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_110_0.svg" /></div>
 </div>
-</div>
-<div class="section" id="id5">
-<h4>Fit to simulated data<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="fit-to-simulated-data-1">
+<h4>Fit to simulated data<a class="headerlink" href="#fit-to-simulated-data-1" title="Permalink to this headline">¶</a></h4>
 <p>In the example, Betancourt performs this for each <code class="docutils literal notranslate"><span class="pre">y</span></code> in trace. Here we only compute this for one element of the trace.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model3</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -1538,8 +1501,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1549,15 +1511,14 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_114_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_114_0.svg" /></div>
 </div>
-</div>
-<div class="section" id="id6">
-<h4>Fit observations and evaluate<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="fit-observations-and-evaluate-2">
+<h4>Fit observations and evaluate<a class="headerlink" href="#fit-observations-and-evaluate-2" title="Permalink to this headline">¶</a></h4>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">## df = pd.read_csv(&#39;data.csv&#39;)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## df = pd.read_csv(&#39;data.csv&#39;)</span>
 <span class="n">data_ys</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 </div>
@@ -1566,8 +1527,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model3</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model3</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">mcmc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">data_ys</span><span class="p">)</span>
 <span class="n">trace</span> <span class="o">=</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">group_by_chain</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -1601,8 +1561,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="s2">&quot;lbda&quot;</span><span class="p">);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="s2">&quot;lbda&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1616,8 +1575,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model3</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model3</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1625,8 +1583,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">hists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ppc</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
@@ -1643,8 +1600,7 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bin_interp</span><span class="p">,</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">,:],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">);</span>
 
 
@@ -1662,9 +1618,9 @@ detector count scale implied here by knowledge of the manufacturing specificatio
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_121_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_121_0.svg" /></div>
 </div>
-</div>
-</div>
-<div class="section" id="Account-for-upper-limit-of-detection">
+</section>
+</section>
+<section id="Account-for-upper-limit-of-detection">
 <h3>Account for upper limit of detection<a class="headerlink" href="#Account-for-upper-limit-of-detection" title="Permalink to this headline">¶</a></h3>
 <p>The results of our third attempt identified the fact that a feature missing from our prior was an upper threshold beyond which detectors were unable to register counts. Now, we implement a means of truncating the zero-inflated Poisson distribution, see <code class="docutils literal notranslate"><span class="pre">TruncatedZeroInflatedPoisson</span></code> below to reflect this newly recognized domain expertise. In principle, if we had done a better job of thinking through the physical constraints of this experiment, we could have identified this as an appropriate
 model in step one. In practice, there will almost always be something of this nature that is not accounted for in the initial incorporation of domain expertise into the model structure.</p>
@@ -1672,8 +1628,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">rv_truncated_poisson</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rv_truncated_poisson</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
     <span class="n">mx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mx</span><span class="p">)</span>
     <span class="n">dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
@@ -1730,8 +1685,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="k">def</span> <span class="nf">model4</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1748,8 +1702,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model4</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trace</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model4</span><span class="p">,</span> <span class="p">{},</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1757,8 +1710,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">simu_lbdas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;lbda&#39;</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simu_lbdas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;lbda&#39;</span><span class="p">]</span>
 <span class="n">simu_thetas</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">]</span>
 <span class="n">simu_ys</span> <span class="o">=</span> <span class="n">trace</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
 </pre></div>
@@ -1768,8 +1720,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">hists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">simu_ys</span><span class="p">)</span>
@@ -1783,8 +1734,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bin_interp</span><span class="p">,</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">,:],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">);</span>
 
 
@@ -1805,8 +1755,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">R</span> <span class="o">=</span> <span class="mi">1000</span>
 
 <span class="n">mcmc</span> <span class="o">=</span> <span class="n">MCMC</span><span class="p">(</span><span class="n">NUTS</span><span class="p">(</span><span class="n">model4</span><span class="p">),</span> <span class="n">num_warmup</span><span class="o">=</span><span class="mi">4</span> <span class="o">*</span> <span class="n">R</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">num_chains</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -1843,8 +1792,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">);</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">plot_posterior</span><span class="p">(</span><span class="n">trace</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1858,8 +1806,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model4</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ppc</span> <span class="o">=</span> <span class="n">Predictive</span><span class="p">(</span><span class="n">model4</span><span class="p">,</span> <span class="n">mcmc</span><span class="o">.</span><span class="n">get_samples</span><span class="p">())(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1867,8 +1814,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_max</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="p">)</span>
 <span class="n">bin_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="p">(</span><span class="n">x_max</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">hists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ppc</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
@@ -1885,8 +1831,7 @@ model in step one. In practice, there will almost always be something of this na
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">c_light</span><span class="p">,</span><span class="n">c_light_highlight</span><span class="p">,</span><span class="n">c_mid</span><span class="p">,</span><span class="n">c_mid_highlight</span><span class="p">]):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">bin_interp</span><span class="p">,</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span><span class="n">prctiles_interp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">i</span><span class="p">,:],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">);</span>
 
 
@@ -1904,42 +1849,13 @@ model in step one. In practice, there will almost always be something of this na
 <div class="output_area docutils container">
 <img alt="../_images/applied-probabilistic-inference_example-numpyro_135_0.svg" src="../_images/applied-probabilistic-inference_example-numpyro_135_0.svg" /></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
           </div>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-
-    <nav class="relbar">
-      <a class="previous" href="../plotting.html" aria-label="Previous topic" >
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
-        </div>
-        <div class="title">
-          <span class="text">
-            <span class="direction">previous</span>
-            Plotting setup
-          </span>
-        </div>
-      </a>
-      <a class="next" href="../references.html" aria-label="Next topic" >
-        <div class="title">
-          <span class="text">
-            <span class="direction">next</span>
-            References
-          </span>
-        </div>
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
-        </div>
-      </a>
-    </nav>
-
-
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 
@@ -1972,7 +1888,7 @@ model in step one. In practice, there will almost always be something of this na
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#“Build,-compute,-critique,-repeat”:-Box’s-loop-in-iteration-through-Betancourt’s-principled-Bayesian-workflow">“Build, compute, critique, repeat”: Box’s loop in iteration through Betancourt’s principled Bayesian workflow</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup-1">Setup</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Load-libraries">Load libraries</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#define-colors">define colors</a></li>
 </ul>
@@ -1989,14 +1905,14 @@ model in step one. In practice, there will almost always be something of this na
 <li class="toctree-l4"><a class="reference internal" href="#Update-the-generative-model-specification">Update the generative model specification</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Simulate-the-updated-model">Simulate the updated model</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#Fit-Simulated-Observations-and-Evaluate">Fit Simulated Observations and Evaluate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">Fit observations and evaluate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fit-observations-and-evaluate-1">Fit observations and evaluate</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Account-for-the-distinction-between-functioning-and-malfunctioning-measurement-devices">Account for the distinction between functioning and malfunctioning measurement devices</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#Update-the-generative-model">Update the generative model</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">Plot prior predictive distribution</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">Fit to simulated data</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">Fit observations and evaluate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plot-prior-predictive-distribution-1">Plot prior predictive distribution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fit-to-simulated-data-1">Fit to simulated data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fit-observations-and-evaluate-2">Fit observations and evaluate</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#Account-for-upper-limit-of-detection">Account for upper limit of detection</a></li>
@@ -2014,12 +1930,38 @@ model in step one. In practice, there will almost always be something of this na
 <div id="ethical-ad-placement"></div>
         </div>
       </div>
+      <div class="clearer"></div>
+    </div>
+
+    <nav class="relbar">
+      <a class="previous" href="../plotting.html" aria-label="Previous topic" >
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+        </div>
+        <div class="title">
+          <span class="text">
+            <span class="direction">previous</span>
+            Plotting setup
+          </span>
+        </div>
+      </a>
+      <a class="next" href="../references.html" aria-label="Next topic" >
+        <div class="title">
+          <span class="text">
+            <span class="direction">next</span>
+            References
+          </span>
+        </div>
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></svg>
+        </div>
+      </a>
+    </nav>
+
     <footer role="contentinfo">
       &#169; Copyright 2021, Cameron Smith.
       Created using <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> 2.4.4.
       <a class="reference external" href="https://insipid-sphinx-theme.readthedocs.io/">Insipid Theme</a>.
     </footer>
-    <div class="sidebar-resize-handle"></div>
-    <div id="overlay"></div>
   </body>
 </html>
